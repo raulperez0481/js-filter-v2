@@ -45,6 +45,8 @@ const data = [
 
 const divProductos=document.querySelector('.productos')
 const divCategorias= document.querySelector('.categorias')
+const rangoPrecios = document.querySelector(".precioRango");
+const precioValor= document.querySelector(".precioValor");
 
 
 function pintarProductos(arrProductos){
@@ -91,5 +93,21 @@ const pintarCategorias = () => {
   })
 };
 
+
+const pintarPrecio = () => {
+  const allPrecios = data.map((item) => item.price);
+  const precioMax = Math.max(...allPrecios);
+
+  rangoPrecios.max = precioMax;
+  rangoPrecios.value = precioMax;
+  precioValor.textContent = precioMax + " €" ;
+
+  rangoPrecios.addEventListener("input", (e) => {
+    precioValor.textContent = e.target.value + " €";
+    pintarProductos(data.filter((item) => item.price <= e.target.value));
+  });
+};
+
+pintarPrecio()
 pintarCategorias();
 pintarProductos(data)
