@@ -74,7 +74,7 @@ const pintarCategorias = () => {
   console.log(allCategorias);
 
   //genero un Set de datos, que es una colección de valores únicos 
-  const categorias = new Set([...allCategorias])
+  const categorias = new Set(["All",...allCategorias])
   console.log(categorias);
     
   //pinto las categorias
@@ -89,7 +89,9 @@ const pintarCategorias = () => {
 
     //mando a la funcion pintarProductos() el array filtrado con los objetos
     //que tengan el mismo texto en la categoria que el texto almacenado en categoriaSeleccionada
-    pintarProductos(data.filter((item) => item.cat === categoriaSeleccionada));
+    categoriaSeleccionada === 'All' 
+    ? pintarProductos(data)
+    : pintarProductos(data.filter((item) => item.cat === categoriaSeleccionada))
   })
 };
 
