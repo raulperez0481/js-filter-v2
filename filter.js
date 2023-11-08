@@ -47,6 +47,7 @@ const divProductos=document.querySelector('.productos')
 const divCategorias= document.querySelector('.categorias')
 const rangoPrecios = document.querySelector(".precioRango");
 const precioValor= document.querySelector(".precioValor");
+const busqueda= document.querySelector(".search");
 
 
 function pintarProductos(arrProductos){
@@ -109,6 +110,17 @@ const pintarPrecio = () => {
     pintarProductos(data.filter((item) => item.price <= e.target.value));
   });
 };
+
+busqueda.addEventListener("input", (e) => {
+    //paso a minusculas el valor de la input de busqueda
+    const value = e.target.value.toLowerCase();
+
+    //busco si la subcadena de texto value se encuentra en el nombre del producto
+    //Si la subcadena no se encuentra, devuelve -1.
+    //Compara el resultado de indexOf() con -1. Si el resultado es diferente de -1, significa que la subcadena de texto se encontró en el nombre del producto, 
+    //por lo que la función de filtro devolverá true. 
+    pintarProductos(data.filter((item) => item.name.toLowerCase().indexOf(value) !== -1));
+});
 
 pintarPrecio()
 pintarCategorias();
